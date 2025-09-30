@@ -1,17 +1,17 @@
 import { HiMagnifyingGlassPlus } from "react-icons/hi2";
 
 const PlusGallery = ({ galleryImages }) => {
-  console.log(galleryImages);
+ 
 
   return (
-    <div className="min-h-screen max-w-screen lg:px-12 flex">
-      <div className="w-full px-3 lg:p-8 flex flex-row flex-wrap content-start gap-6 h-fit max-w-screen min-h-screen lg:max-w-[70vw] overflow-hidden">
+    <div className="sm:min-h-screen max-w-screen lg:px-12 flex">
+      <div className="w-full px-3 lg:p-8 flex flex-row flex-wrap content-start gap-6 h-fit max-w-screen pb-4 sm:min-h-screen lg:max-w-[70vw] overflow-hidden">
         
         {galleryImages?.map((item, idx) =>
           item.imageUrl?.map((url, urlIdx) => (
             <div
               key={`${idx}-${urlIdx}`}
-              className="relative max-h-96 lg:h-60 max-w-[45%] w-full lg:max-w-[30%]"
+              className="relative  max-h-96 lg:h-60 max-w-[45%] w-full lg:max-w-[30%]"
             >
               <img
                 className="w-full h-full rounded-3xl object-cover"
@@ -32,7 +32,7 @@ const PlusGallery = ({ galleryImages }) => {
           Life is beautiful on the road. Explore the world through the eyes of
           #noovoplus.
         </p>
-        <button className="bg-black max-w-32 py-3 rounded-3xl text-white">
+        <button className="bg-black w-full max-w-xl py-3 rounded-3xl text-white">
           View Gallery
         </button>
       </div>

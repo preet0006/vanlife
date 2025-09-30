@@ -2,11 +2,11 @@
 
 const PlusInfo = () => {
   return (
-    <div className=" flex flex-col min-h-screen w-full max-w-screen">
+    <div className=" hidden md:block flex flex-col min-h-screen w-full max-w-screen">
          
          <div className="flex w-full justify-center mt-20 items-center  flex-col space-y-8">
             <h4 className="text-6xl"> Specs</h4>
-            <p className="text-gray-400 text-[18px]">Here's how to measure awesome.</p>
+            <p className="text-gray-400 text-[18px]"> Here`s how to measure awesome.</p>
          </div>
 
         <div className="max-w-screen mt-4 flex flex-col justify-center items-center">

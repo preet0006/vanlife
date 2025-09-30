@@ -44,13 +44,13 @@ useEffect(() => {
     <div className="flex flex-col overflow-x-hidden m-auto max-w-screen w-full ">
 
     <div className="relative bg-[url('/plus.webp')] 
-     bg-no-repeat bg-cover bg-center w-screen h-screen "> 
+     bg-no-repeat bg-cover bg-cente max-w-screen w-full h-[70dvh]  sm:w-screen sm:h-screen "> 
   
     <section className="  text-black">
     <Navbar/>
   
     <div className="absolute bottom-14 sm:pl-12   ">
-      <Hero/>
+      <Hero type="pop"/>
     </div>
   
     </section>
@@ -88,12 +88,15 @@ useEffect(() => {
         <PlusVanShowCase/>
   
         <div className="bg-[#131211] mt-30 min-h-screen min-w-screen text-white">
-         <div className="flex flex-col  md:flex-row gap-4 justify-center
+         <div className="flex flex-col  md:flex-row gap-4 justify-center items-center sm:ite
      text-center space-x-6 lg:space-x-60 py-20 ">
-        <h3 className="text-2xl  lg:text-6xl font-normal">
+        <h3 className=" hidden sm:block text-xl  sm:text-2xl  lg:text-6xl font-normal">
           Geared Up for <br /> Adventure</h3>
 
-         <p className="text-gray-300 max-w-80 lg:mt-2 text-[20px]  text-center " >Bike, hike, surf, yoga... customize your Noovo for your type of fun. Choose which racks, tires, and storage will aid your adventure.
+          <h3 className="  sm:hidden text-xl  sm:text-2xl  lg:text-6xl font-normal">
+          Geared Up for  Adventure</h3>
+
+         <p className="text-gray-300  max-w-80 lg:mt-2  text-xs sm:text-[20px]  text-center " >Bike, hike, surf, yoga... customize your Noovo for your type of fun. Choose which racks, tires, and storage will aid your adventure.
             </p> 
     </div>
           <VanCard type="plus" plusData={plusGearCards} />

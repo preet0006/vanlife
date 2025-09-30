@@ -18,11 +18,11 @@ const InventoryPage = () => {
   
 
   return (
-    <div className="flex  flex-col max-w-screen w-full">
+    <div className="flex  mb-10 flex-col max-w-screen w-full">
 
       <div className="flex flex-col justify-between items-center pt-12 ">
-      <h3 className="text-6xl font-normal">Noovo Camper Van Inventory</h3>
-      <p className="max-w-xl text-center mt-6 text-[20px] text-gray-400">Explore our new and used selection of road-ready Class B RVs for sale.
+      <h3 className="text-2xl md:text-6xl font-medium sm:font-normal">Noovo Camper Van Inventory</h3>
+      <p className="max-w-xl text-xs text-center mt-6  sm:text-[20px] text-gray-400">Explore our new and used selection of road-ready Class B RVs for sale.
       Nationwide shipping available.</p>
   
       </div>
@@ -34,7 +34,7 @@ const InventoryPage = () => {
        </div>
    
      
-      <div className="flex p-3 z-10">
+      <div className="flex px-3 sm:p-3 z-10">
         <InventoryCards result={result} inventoryData={inventoryData}/>
        
       </div>

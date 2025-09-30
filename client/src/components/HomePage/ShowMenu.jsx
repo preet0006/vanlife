@@ -1,19 +1,31 @@
+import { IoCloseSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+
 
 const ShowMenu = ({isOpen}) => {
 
+  const navigate = useNavigate()
 
   
 
 
   return (
-    <div className='bg-[#F9F7F4]  min-w-screen  h-screen overflow-hidden relative   text-black flex flex-col  '>
+  <div className="w-full h-full bg-[#F9F7F4] flex flex-col">
 
       
 
         <div className="flex w-full h-16 p-6  max-w-screen justify-between">
-        <h5 onClick={()=>isOpen(false)}>X Close</h5>
-        <h4>logo</h4>
-        <h5>Build Your Van<br /></h5>   
+        <h5 className="text-3xl cursor-pointer" onClick={()=>isOpen(false)}><IoCloseSharp /></h5>
+        <img className="h-12 object-cover w-12 rounded-3xl" src="/vanlogo.webp " alt="" />
+
+        <div className="">   
+     <button onClick={()=>navigate("/build")} className="group p-2 px-6 rounded-full border cursor-pointer bg-white overflow-hidden">
+        <span className="inline-block transition-transform duration-300 group-hover:translate-x-3">
+     Build your Van
+      </span>
+      </button>
+
+         </div>
         </div>
           
 
@@ -22,13 +34,14 @@ const ShowMenu = ({isOpen}) => {
        <div className="flex  text-4xl text-gray-500 flex-col px-10 py-6 space-y-1 ">
        
          <h3>Our Models</h3>
-         <h3>Inventory</h3>
-         <h3>Find a Dealer</h3>
-         <h3>Service</h3>
+         <h3>Meet Us</h3>
+         <h3>Owners</h3>
+         <h3>Services</h3>
          <h3>Try a Noovo</h3>
+        
          <hr className="w-56" />
 
-         <div className="mt-8 space-y-1 text-3xl">
+         <div className="mt-8 space-y-1  text-3xl">
             <h3>Blog</h3>
             <h3>Events</h3>
             <h3>Our Mission</h3>

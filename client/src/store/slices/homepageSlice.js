@@ -38,7 +38,7 @@ export const homeSlice = createSlice({
 
         },
         setPlus(state,action){
-            console.log(action.payload)
+          
             state.plus = action.payload
 
         }
@@ -91,7 +91,7 @@ export const getPlus = ()=>async(dispatch)=>{
     const response = await axios.get(`${baseUrl}plus`,{withCredentials:true})
    
     dispatch(setPlus(response.data.data))
-    console.log(response)
+   
     
 }
 

@@ -155,3 +155,13 @@ export const InventoryDetails = {
     { label: "Blue", value: "blue" }
   ]
 };
+
+
+export const options = [
+     { name: "Off Road Tires", price: 3500 },
+  { name: "Swing Away Bike Rack", price: 1250 },
+  { name: "Rear Box Storage", price: 3250 },
+  { name: "Combo Adventure Pack", price: 4200 },
+  { name: "Ladder & Tire Carrier", price: 2150 },
+  { name: "Roof Rack Storage", price: 2800 },
+]

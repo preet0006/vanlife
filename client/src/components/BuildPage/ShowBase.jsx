@@ -8,22 +8,27 @@ const ShowBase = ({setImage}) => {
   
 
  const [orderData,setOrderData]=useState([]);
-
+ 
 
   const dispatch = useDispatch()
 
 const data = useSelector((state)=>state.build.baseData || []);
+// console.log(data)
 
 
 const handleOrder = (item) => {
+
+
   setOrderData((prev) => {
     let updated = [...prev];
 
     if (item.utilityType) {
-      // Remove existing item of the same utility type
+
       updated = updated.filter((e) => e.utilityType !== item.utilityType);
     } else {
+
       const key = Object.keys(item)[0];
+    
       updated = updated.filter((entry) => !Object.prototype.hasOwnProperty.call(entry, key));
     }
 
@@ -109,15 +114,25 @@ const allUtilities = useMemo(() => {
       <div>
         <div className="flex flex-wrap gap-4 pl-2 mt-6">
           {  
-            color?.map((item, index) => (
+            color?.map((item, index) =>{
+               const colorKey = item.availableColors[0].key.toLowerCase();
+                // console.log(colorKey)
+               const bgClass = {
+               gray: "bg-gray-500",
+               sandstone: "bg-yellow-200", 
+                granite: "bg-gray-700",
+                silver: "bg-gray-200",
+               }[colorKey] || "bg-gray-300";
+              return (
               <div key={index} className="border flex w-32 h-16  rounded-2xl">          
-                <div onClick={() => {setImage(item.availableColors[0].imgUrl); handleOrder({color:item.availableColors[0].key,}) }} className="flex text-center  ml-2 mt-3 w-9 h-9 rounded-4xl bg-orange-500">
+                <div onClick={() => {setImage(item.availableColors[0].imgUrl); handleOrder({color:item.availableColors[0].key,}) }} className={`flex text-center  ml-2 mt-3 w-9 h-9 rounded-4xl ${bgClass}
+                `}>
                   <button className="text-[14px] font-serif ml-12 ">
                     {item.availableColors[0].key} <span>Included</span>
                   </button>
                 </div>
               </div>
-            ))
+            )})
           }
          </div>
          </div>
@@ -129,7 +144,11 @@ const allUtilities = useMemo(() => {
             <div  key={index}>
               <h5 className="text-xl font-medium mt-6">Choose Your {type}</h5>
               {items.map((utility, index) => (
-                <div onClick={()=>handleOrder({utilityName:utility.utilities[0].name,utilityDetails:utility.utilities[0].details,utilityType:utility.utilities[0].utilityType  })} key={index} className="flex mt-3 text-gray-500 w-full lg:max-w-80 text-center justify-between rounded-2xl p-6 bg-gray-100">
+                <div onClick={()=>handleOrder({
+                  utilityName:utility.utilities[0].name,
+                  utilityDetails:utility.utilities[0].details,
+                  utilityType:utility.utilities[0].utilityType,
+                  utilitiyPrice:utility.utilities[0].price  })} key={index} className="flex mt-3 text-gray-500 w-full lg:max-w-80 text-center justify-between rounded-2xl p-6 bg-gray-100">
                   <h6>{utility.utilities[0].name} <br /> <span className="text-xs">{utility.utilities[0].details}</span></h6>
                   <p className="text-xs">{utility.utilities[0].price}</p>  
                 </div>

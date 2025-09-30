@@ -6,7 +6,11 @@ import { InventoryDetails } from "../../constants";
 const SideBar = ({setInventoryData,setResult}) => {
 
 
+
   const [isOpen,setIsOpen]= useState(true);
+  const [selected,setSelected]=useState(false)
+
+  
 
 
   const data = useSelector((state)=>state.order.inventory);
@@ -38,7 +42,7 @@ const SideBar = ({setInventoryData,setResult}) => {
     console.log(value,type)
      
     try {
-      
+      setSelected({type,value})
       if (value === "all") {
       setInventoryData(data);
       setResult(data.length > 0); 
@@ -74,27 +78,36 @@ const SideBar = ({setInventoryData,setResult}) => {
       <button className="lg:hidden" onClick={()=>setIsOpen(!isOpen)}>Sort By</button>
       {
         isOpen&&(
-       <div className="flex h-screen bg-white lg:h-auto  flex-col w-full  ">
+       <div className="absolute lg:relative fixed  -top-3 z-50 flex min-h-screen bg-white lg:h-auto  flex-col w-full  ">
 
 
-       <button className="bg-white border mt-12 w-full max-w-screen text-gray-700  lg:max-w-[120px] py-3 rounded-3xl lg:hidden">Back</button> 
+       <button onClick={()=>setIsOpen(!isOpen)} className="bg-white border   mt-12 w-full max-w-screen text-gray-700  lg:max-w-[120px] py-3 rounded-3xl lg:hidden">Back</button> 
     <h3 className="p-2 mt-6 text-[20px]">Models</h3>
     
-     <div className="flex flex-wrap items-center gap-4 p-3  "> 
-      {
+     <div className="flex flex-wrap justify-center lg:justify-normal items-center gap-4 p-3  "> 
+      { 
         models.map((item,idx)=>(
 
-         <button onClick={()=>handleClick(item.value,"model")} key={idx} className="bg-white  border w-full max-w-5/12 text-gray-700 lg:max-w-[120px] py-3 rounded-3xl ">{item.label}</button>
+         <button onClick={()=>handleClick(item.value,"model")}
+          key={idx} className={`border w-full max-w-5/12 lg:max-w-[120px] py-3 rounded-3xl 
+      ${selected.type === "model" && selected.value === item.value 
+        ? "border-white bg-gray-950 text-white" 
+        : "bg-white border-gray-700 text-gray-700"}`}
+  >{item.label}</button>
         ))
       }
          
        </div>
 
        <h3 className="p-2 text-[20px]">Exterior Color</h3>
-       <div className="flex flex-wrap items-center gap-4 p-3  ">
+       <div className="flex flex-wrap justify-center lg:justify-normal  items-center gap-4 p-3  ">
         {
           color.map((e,idx)=>(
-            <button onClick={()=>handleClick(e.value,"color")}  key={idx} className="bg-white border  text-gray-700 w-full max-w-5/12 lg:max-w-[120px] py-3 rounded-3xl ">{e.label}</button>
+            <button onClick={()=>handleClick(e.value,"color")}  key={idx} className={`border w-full max-w-5/12 lg:max-w-[120px] py-3 rounded-3xl 
+      ${selected.type === "color" && selected.value === e.value 
+        ? "border-white bg-gray-950 text-white" 
+        : "bg-white border-gray-700 text-gray-700"}`}
+  >{e.label}</button>
 
           ))
         }
@@ -102,7 +115,7 @@ const SideBar = ({setInventoryData,setResult}) => {
          
         
      </div>
-     <button className="bg-white border mt-12 w-full max-w-screen text-gray-700  lg:max-w-[120px] py-3 rounded-3xl lg:hidden">Apply</button> </div>
+     <button onClick={()=>setIsOpen(!isOpen)} className="bg-white border mt-4  lg:mt-12 w-full max-w-screen text-gray-700 mb-4  lg:max-w-[120px] py-3 rounded-3xl lg:hidden">Apply</button> </div>
        
         )
       }

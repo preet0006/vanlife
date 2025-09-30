@@ -12,7 +12,7 @@ const PlusSection = () => {
         </div> 
 
         <div className="space-x-6 flex  w-full max-w-96">
-           <button className=" py-1  text-xs  rounded-4xl border sm:text-[14px] w-full max-w-36 ">Schedule a call</button> 
+           <button className=" py-1 px-1 text-xs  rounded-4xl border sm:text-[14px] w-full max-w-36 ">Schedule a call</button> 
            
            <button className="w-full text-xs max-w-36 rounded-4xl sm:text-[14px]   border ">Get brochure</button> 
 
@@ -24,12 +24,12 @@ const PlusSection = () => {
 
     </div>
 
-   <div className="max-w-screen px-5 bg-[#F9F7F4] mt-4 min-h-screen">
+   <div className="max-w-screen px-5 bg-[#F9F7F4] mt-4 sm:min-h-screen">
     <div className="flex pt-20 flex-col  space-y-4 items-center">
-    <h1 className="text-xl sm:text-5xl">Van Life Just Got Roomier.</h1>
+    <h1 className="text-xl  sm:text-5xl">Van Life Just Got Roomier.</h1>
     <p className="w-full text-xs sm:text-[18px] max-w-96 text-center text-gray-400">Say goodbye to crouching. With an interior height of 7ft and a stowable bed, step into the world’s most comfortable van.</p>
     <p className=" text-xs sm:text-[16px]">Starting at <span className="font-semibold"> $186,700 or $1,248 per month.</span></p>
-    <img className=" mt-12 w-full max-w-80" src="/plusjeep.webp" alt="" />
+    <img className=" mt-12 max-w-56 w-full sm:max-w-80" src="/plusjeep.webp" alt="" />
 
     <div className="flex justify-between  mt-10 w-full b max-w-2xl text-xs sm:text-[20px] ">
        <div className="flex flex-col">
@@ -49,7 +49,7 @@ const PlusSection = () => {
 
     </div>
 
-    <button className="mt-6 mb-10 w-full max-w-60 py-2 border rounded-3xl">Downlod brochure</button>
+    <button className="mt-6 mb-10 w-full text-xs sm:text-base max-w-40 sm:max-w-60 py-2 border rounded-3xl">Downlod brochure</button>
 
     </div>
    

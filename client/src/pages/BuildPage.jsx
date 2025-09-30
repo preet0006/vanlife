@@ -8,7 +8,9 @@ import { fetchData } from "../store/slices/buildSlice"
 const BuildPage = () => {
   const dispatch = useDispatch()
 
-  const [image,setImage]=useState('')
+  const [image,setImage]=useState('');
+  const  [gearData,setGearData]= useState([])
+
   console.log(image)
  
   useEffect(() => {
@@ -25,7 +27,7 @@ const BuildPage = () => {
       <BuildLeftSection image={image} />
     </div>
     <div className=" w-full max-w-screen  lg:max-w-[25vw]">
-      <BuildRightSection  setImage={setImage} />
+      <BuildRightSection gearData={gearData} setGearData={setGearData}  setImage={setImage} />
 
     </div>
 

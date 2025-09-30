@@ -7,17 +7,17 @@ import gsap from "gsap";
 
 
 const VanCard = ({type,plusData}) => {
-  console.log(plusData)
+
+  
 
 
   const [card,setCards]=useState([])
 
   const cardsData= useSelector((state)=>state.home.cards);
 
-  console.log(card)
+
 
   useEffect(() => {
-   if(!cardsData || cardsData.length === 0) return;
    let data = [];
 
    if(type === "main"){
@@ -28,7 +28,7 @@ const VanCard = ({type,plusData}) => {
     data = plusData || [] 
    }
       setCards(data)
-  }, [type,cardsData]);
+  }, [type,cardsData,plusData]);
 
   const cardRef = useRef([])
   const textRef = useRef([])
@@ -98,22 +98,22 @@ useGSAP(() => {
   
   return (
 
-    <div className=" flex  overflow-x-auto scrollbar-hide ">
+    <div className=" flex flex-nowrap overflow-x-auto scrollbar-hide ">
 
       {
         card.map((elem,index)=>(
        
 
-          <div  key={index} className="flex  text-white flex-nowrap gap-6 mt-10 px-4">
+          <div  key={index} className="flex  text-white flex-nowrap gap-6 sm:mt-10 px-4">
 
-          <div className=" justify-center items-center flex flex-col relative mb-12  lg:rounded-4xl w-80  h-[500px] rounded-none lg:w-96   gap-3 ">
+          <div className=" justify-center items-center flex flex-col relative mb-12  lg:rounded-4xl w-72  h-[500px] rounded-none lg:w-96   gap-3 ">
 
               <img className=" h-80 w-80 object-cover  lg:h-full lg:w-full  rounded-none  lg:rounded-4xl " src={elem.images[0]} alt="" />
 
               <div className="lg:hidden">
-              <h3 className="text-2xl font-medium">{elem.name}</h3>
+              <h3 className="text-xl sm:text-2xl font-medium">{elem.name}</h3>
                 
-              <p className="pt-5  text-gray-500">{elem.description}</p>
+              <p className=" text-xs sm:text-base pt-5  text-gray-500">{elem.description}</p>
 
                 
                 

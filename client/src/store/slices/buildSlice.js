@@ -52,7 +52,7 @@ const baseUrl = "http://localhost:3000/api/v1/"
 export const fetchData = ()=>async(dispatch)=>{
 try {
         const response = await axios.get(`${baseUrl}build`,{withCredentials:true})
-        console.log(response)
+        
         dispatch(setGear(response.data.gears))
         dispatch(setImage(response.data.modifyimages));
 

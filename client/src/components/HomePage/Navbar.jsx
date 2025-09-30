@@ -7,18 +7,35 @@ import { useNavigate } from 'react-router-dom';
 import InfoCard from "./infoCard";
 
 
-const Navbar = () => {
+const Navbar = ({setActive}) => {
 
 
+  
+ 
+  
 
+
+  const [isOpen,setIsOpen]=useState(false)
   const [showContact,setShowContact] = useState(false);
   const [showMenu,setShowMenu] = useState(false)
+    const [showNav, setShowNav] = useState(true);
+  
+    
+ 
 
   const modelRef = useRef()
 
   const head = useRef();
 
   const navigate = useNavigate()
+
+
+  const handleClose = ()=>{
+    setTimeout(()=>{
+      setIsOpen(!isOpen)
+    },3000)
+
+  }
 
      useEffect(() => { 
       gsap.from(head.current,{
@@ -30,6 +47,28 @@ const Navbar = () => {
      }, [])
 
 
+     useEffect(() => {
+      gsap.to(head.current, {
+      backgroundColor: "rgba(0,0,0,0.2)",
+      color: "#000",
+      boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+      backdropFilter: "blur(8px)",
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "20%",
+        scrub: true,
+      },
+    });
+  }, []);
+     
+
+  
+
+ 
+
+          
 
      useEffect(() => { 
       if(modelRef.current){
@@ -44,9 +83,9 @@ const Navbar = () => {
         })
        } else{
         gsap.to(modelRef.current,{
-          y: -400,
+          y: -800,
           // opacity: 0,
-          duration: 1,
+          duration: 1.5,
           ease: "power2.in",
           onComplete: () => {
             gsap.set(modelRef.current, { display: "none" }); 
@@ -68,34 +107,37 @@ const Navbar = () => {
   return (
     <>
   
-    <div ref={head} className="flex  text-white justify-between py-7
-     px-8 mt-2  text-xl overflow-x-hidden">
+      <div   ref={head} className={` top-0 left-0 w-full z-[9999]  flex text-white justify-between py-7 px-8 text-xl `}
+      >
       
-        <div  className="flex  space-x-5 text-[15px] text-lig pt-3   font-medium mt-3 ">
-            <LuEqual onClick={()=>setShowMenu(!showMenu)} className=" -mt-1 text-3xl " />
-            <h3 className="hidden  md:block">Lite</h3>
-            <h3 className="hidden md:block">Plus</h3>
-            <h3 className="hidden md:block">Inventory</h3>
+        <div  className={` cursor-pointer   flex z-50  space-x-5 text-[15px]  pt-3  font-normal mt-3 `}>
+            <LuEqual onClick={()=>setShowMenu(!showMenu)} className="-mt-4 sm:-mt-1 text-3xl " />
+            
+            
+            <div  className="relative z-20 ">
+              
+             <InfoCard setActive={setActive}   />
+              </div>
             <h3 className="hidden md:block">Service</h3>
             <h3 className="hidden md:block">Blog</h3>
         </div>
-        <div className="flex flex-col ">
-            <h2 className="text-[40px]  font-semibold">noovo</h2>
+        <div className="flex flex-col z-40 ">
+            <h2 className=" text-xl sm:text-[40px]  font-semibold">noovo</h2>
             <h2 className="font-light text-xs font-mono text-center   uppercase ">Travel Vans</h2>
         </div>
         <div className="flex  md:pr-2 justify-center items-center    space-x-4">
 
-            <button  onClick={()=>setShowContact(!showContact)} className=" hidden lg:block w-full flex-none max-w-30 text-[14px] py-3 border rounded-full" >Contact Us</button>
+            <button  onClick={()=>setShowContact(!showContact)} className=" hidden lg:block w-full flex-none max-w-30 text-[14px] py-3 border rounded-full cursor-pointer" >Contact Us</button>
 
-             <button onClick={()=>navigate('/build')}  className="flex gap-1 mr-12 p-2 items-center bg-white text-black w-full flex-none max-w-48 text-center text-xs sm:text-[14px] py-2 rounded-4xl">
+             <button onClick={()=>navigate('/build')}  className="flex gap-1 sm:mr-12 p-2  cursor-pointer items-center bg-white text-black w-full flex-none max-w-48 text-center text-xs sm:text-[14px] py-2 rounded-4xl">
                  <span>
-                <img className="hidden  sm:block w-12 ml-3" src="https://images.hgmsites.net/hug/2017-mercedes-benz-sprinter-passenger-van-2500-high-roof-v6-170-rwd-angular-front-exterior-view_100602682_h.jpg" alt="" /></span> 
+                <img className="hidden text-xs rounded-full object-cover  sm:text-base brightness-200 sm:block h-10 w-10 ml-3" src="/vanlogo.webp" alt="" /></span > 
                  Build your Van</button>
         </div>
     </div>
 
   { showContact &&(
-     <div className="absolute flex max-w-screen h-screen justify-center items-center inset-0">
+     <div onClick={()=>setShowContact(false)} className="absolute flex max-w-screen  h-screen justify-center items-center inset-0">
 
      <div className="flex w-full max-w-screen z-20  items-center">
      <ContactUs isOpen = {setShowContact}/>
@@ -108,13 +150,25 @@ const Navbar = () => {
  }
 
 
-          <div ref={modelRef} className="absolute hidden left-0 top-0">
+         <div ref={modelRef} className="fixed inset-0 hidden z-[99999]">
            <ShowMenu isOpen = {setShowMenu}/>
           </div>
-             
-            {/* <div className=" absolute max-w-screen px-8   top-6  ">
-            <InfoCard/>
-              </div>  */}
+
+      <div className="z-10 mt-2  absolute max-w-screen px-8   top-6  ">
+      {isOpen && (
+            <div className="fixed inset-0 z-10 flex justify-center items-start pt-6">
+          
+          <div
+      className="absolute inset-0 bg-transparent"
+      onClick={() => setIsOpen(false)}
+    ></div>
+
+  
+    
+  </div>
+)}
+ 
+  </div>  
 
   
     </>
@@ -122,3 +176,6 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+
+
