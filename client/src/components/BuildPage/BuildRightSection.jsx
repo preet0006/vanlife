@@ -1,6 +1,6 @@
 import { useState } from "react"
 import ShowBase from "./ShowBase";
-import ShowGears from "./SHowGears";
+import ShowGears from "./ShowGears";
 import ShowOrders from "./ShowOrders";
 
 
