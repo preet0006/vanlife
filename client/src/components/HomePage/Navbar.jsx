@@ -4,7 +4,7 @@ import ContactUs from "./ContactUs";
 import ShowMenu from "./ShowMenu";
 import gsap from 'gsap'
 import { useNavigate } from 'react-router-dom';
-import InfoCard from "./infoCard";
+import InfoCard from "./InfoCard";
 
 
 const Navbar = ({setActive}) => {
