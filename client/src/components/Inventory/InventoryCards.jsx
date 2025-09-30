@@ -38,7 +38,7 @@ const InventoryCards = ({inventoryData,result}) => {
           </div>
 
           <div className="absolute   top-3/12   right-6">
-            <p className="  inline-block ml-12 px-8 text-[11px] py-4 text-center rounded-3xl bg-white   sm:text-xl"> <FaArrowRight className="text-gray-600 font-light"  /> </p>
+            <p className="  inline-block ml-12 cursor-pointer px-8 text-[11px] py-4 text-center rounded-3xl bg-white   sm:text-xl"> <FaArrowRight className="text-gray-600 font-light"  /> </p>
 
             <h5 className=" mt-30 text-white text-xs sm:text-xl ">${item.price}</h5>
             <p className="text-gray-300 font-medium text-xs sm:text-[16px]">`or from ${item.emi}/mo`</p>
@@ -55,7 +55,7 @@ const InventoryCards = ({inventoryData,result}) => {
         </div>
        
         <div className="flex justify-center items-center mt-4 ">
-        <button onClick={handleNavigation} className="w-full rounded-4xl py-3 mb-3 max-w-52  sm:max-w-[440px] bg-black text-white">Get  More Information</button>
+        <button onClick={handleNavigation} className="w-full cursor-pointer rounded-4xl py-3 mb-3 max-w-52  sm:max-w-[440px] bg-black text-white">Get  More Information</button>
         </div>
            
         </div>

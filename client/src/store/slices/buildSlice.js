@@ -47,11 +47,11 @@ export const buildSlice = createSlice({
 
 export const {setGear,setImage,setInitial,removeInitial,setBase,setOrderDetails}=buildSlice.actions
 
-const baseUrl = "http://localhost:3000/api/v1/"
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export const fetchData = ()=>async(dispatch)=>{
 try {
-        const response = await axios.get(`${baseUrl}build`,{withCredentials:true})
+        const response = await axios.get(`${baseUrl}/build`,{withCredentials:true})
         
         dispatch(setGear(response.data.gears))
         dispatch(setImage(response.data.modifyimages));

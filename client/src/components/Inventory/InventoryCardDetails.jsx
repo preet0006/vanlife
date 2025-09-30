@@ -113,10 +113,10 @@ const InventoryCardDetails = () => {
                 or from{" "}
                 <span className="font-semibold">{item.emi} per month</span>
               </p>
-              <button className="bg-orange-400 mt-6 w-full rounded-4xl py-3 max-w-3xl">
+              <button onClick={()=>navigate('/reserve')} className="bg-orange-400 cursor-pointer mt-6 w-full rounded-4xl py-3 max-w-3xl">
                 Reserve this van
               </button>
-              <button className="border mt-2 w-full rounded-4xl py-3 max-w-3xl">
+              <button className="border cursor-pointer mt-2 w-full rounded-4xl py-3 max-w-3xl">
                 Contact Us
               </button>
               <hr className="text-gray-300 mt-4" />

@@ -47,12 +47,12 @@ export const homeSlice = createSlice({
 })
 export const {sethero,setVanCard,setImages,setCards,setPlus}=homeSlice.actions;
 
-const baseUrl = "http://localhost:3000/api/v1/"
+const baseUrl = import.meta.env.VITE_API_URL;
 
 
 export const getData =()=> async(dispatch)=>{
     try {
-        const response = await axios.get(`${baseUrl}homepage`,{withCredentials:true});
+        const response = await axios.get(`${baseUrl}/homepage`,{withCredentials:true});
          
         const images = {
             hero1:[],
@@ -78,7 +78,7 @@ export const getData =()=> async(dispatch)=>{
 
 export const gethome = ()=>async(dispatch)=>{
     
-    const response = await axios.get(`${baseUrl}rest`,{withCredentials:true})
+    const response = await axios.get(`${baseUrl}/rest`,{withCredentials:true})
     // console.log(response.data.data.cards)
 
    dispatch( setImages(response.data.data.images));
@@ -88,7 +88,7 @@ export const gethome = ()=>async(dispatch)=>{
 
 export const getPlus = ()=>async(dispatch)=>{
     
-    const response = await axios.get(`${baseUrl}plus`,{withCredentials:true})
+    const response = await axios.get(`${baseUrl}/plus`,{withCredentials:true})
    
     dispatch(setPlus(response.data.data))
    

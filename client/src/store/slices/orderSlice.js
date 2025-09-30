@@ -28,11 +28,11 @@ export const OrderSlice = createSlice({
 
 export const { setOrder, setColor, setModify,setInventory } = OrderSlice.actions;
 
-const baseUrl = "http://localhost:3000/api/v1/"
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export const InventoryData = ()=>async(dispatch)=>{
    try {
-    const response = await axios.get(`${baseUrl}inventory`,{withCredentials:true})
+    const response = await axios.get(`${baseUrl}/inventory`,{withCredentials:true})
     console.log(response)
     dispatch(setInventory(response.data))
 
