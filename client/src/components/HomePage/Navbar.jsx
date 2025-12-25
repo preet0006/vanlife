@@ -111,23 +111,23 @@ const Navbar = ({setActive}) => {
       >
       
         <div  className={` cursor-pointer   flex z-50  space-x-5 text-[15px]  pt-3  font-normal mt-3 `}>
-            <LuEqual onClick={()=>setShowMenu(!showMenu)} className="-mt-4 sm:-mt-1 text-3xl " />
+            <LuEqual onClick={()=>setShowMenu(!showMenu)} className="-mt-4 text-gray-100 sm:-mt-1 text-3xl " />
             
             
-            <div  className="relative z-20 ">
+            <div  className="relative z-20  text-gray-100">
               
              <InfoCard setActive={setActive}   />
               </div>
-            <h3 className="hidden md:block">Service</h3>
-            <h3 className="hidden md:block">Blog</h3>
+            <h3 className="hidden md:block text-gray-100">Service</h3>
+            <h3 className="hidden md:block text-gray-100">Blog</h3>
         </div>
         <div className="flex flex-col z-40 ">
-            <h2 className=" text-xl sm:text-[40px]  font-semibold">noovo</h2>
-            <h2 className="font-light text-xs font-mono text-center   uppercase ">Travel Vans</h2>
+            <h2 className=" text-xl sm:text-[40px] text-white font-semibold">noovo</h2>
+            <h2 className="font-light text-xs font-mono text-center text-gray-100   uppercase ">Travel Vans</h2>
         </div>
         <div className="flex  md:pr-2 justify-center items-center    space-x-4">
 
-            <button  onClick={()=>setShowContact(!showContact)} className=" hidden lg:block w-full flex-none max-w-30 text-[14px] py-3 border rounded-full cursor-pointer" >Contact Us</button>
+            <button  onClick={()=>setShowContact(!showContact)} className=" hidden lg:block w-full  text-gray-100 font-semibold flex-none max-w-30 text-[14px] py-3 border rounded-full cursor-pointer" >Contact Us</button>
 
              <button onClick={()=>navigate('/build')}  className="flex gap-1 sm:mr-12 p-2  cursor-pointer items-center bg-white text-black w-full flex-none max-w-48 text-center text-xs sm:text-[14px] py-2 rounded-4xl">
                  <span>

@@ -43,7 +43,7 @@ const Hero = ({type}) => {
               Discover Plus
             </button>
             ):
-             <button onClick={()=>navigate('/')} className="bg-white py-1 px-4 sm:py-3 rounded-4xl ">
+             <button onClick={()=>navigate('/plus')} className="bg-white py-1 px-4 sm:py-3 rounded-4xl ">
                  Discover Pop
             </button>
             }
