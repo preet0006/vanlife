@@ -21,7 +21,7 @@ const BuildLeftSection = ({image}) => {
       <div className="w-full h-full">
         <img
           className="w-full object-cover lg:-translate-4  "
-          src={image || "/build.webp"}
+          src={image || "/girldog.webp"  }
           alt=""
         />
       </div>
