@@ -1,7 +1,11 @@
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { InventorySkeleton } from "./InventorySkelelton";
+import { useSelector } from "react-redux";
 
 const InventoryCards = ({inventoryData,result}) => {
+
+ const { loading } = useSelector((state) => state.order);
 
   const navigate = useNavigate()
   console.log(inventoryData.length)
@@ -16,6 +20,20 @@ const InventoryCards = ({inventoryData,result}) => {
    navigate(`/details/${item._id}`);
 
   }
+
+
+if (loading) {
+  return (
+    <div className="flex w-full  md:min-w-6xl mt-6 ">
+      <div className="flex flex-wrap justify-center gap-6 w-full">
+        {[...Array(4)].map((_, idx) => (
+          <InventorySkeleton key={idx} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <div className="flex mt-6">

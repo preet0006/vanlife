@@ -18,7 +18,8 @@ import { Element } from "react-scroll"
 
 const HomePage = () => {
   const dispatch = useDispatch()
-  const data = useSelector((state) => state.home.plus)
+  const { plus:data, loading } = useSelector((state) => state.home);
+  console.log(data)
 
   const {
     heroImages = [],
@@ -35,10 +36,26 @@ const HomePage = () => {
     }
   }, [dispatch, data])
 
+
+
+  if (loading) {
+  return (
+  <div className="flex items-center justify-center min-h-[60vh]">
+  <div className="flex space-x-2">
+    <span className="h-2.5 w-2.5 bg-gray-800 rounded-full animate-pulse" />
+    <span className="h-2.5 w-2.5 bg-gray-800 rounded-full animate-pulse [animation-delay:200ms]" />
+    <span className="h-2.5 w-2.5 bg-gray-800 rounded-full animate-pulse [animation-delay:400ms]" />
+  </div>
+</div>
+
+  );
+}
+
+
   return (
     <div className="flex flex-col overflow-x-hidden m-auto max-w-screen w-full scrollbar-hide">
 
-      {/* Hero Section */}
+      
       <div className="relative bg-[url('/plus.webp')] bg-no-repeat bg-cover bg-center max-w-screen w-full h-[70dvh] sm:w-screen sm:h-screen">
         <section className="text-black">
           <Navbar />
@@ -48,7 +65,7 @@ const HomePage = () => {
         </section>
       </div>
 
-      {/* Plus Sections */}
+     
       <Element name="plusSection">
         <PlusSection />
       </Element>

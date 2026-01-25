@@ -11,14 +11,14 @@ const SHowGears = ({ setImage, gearsData, setGearData }) => {
   const data = useSelector((state) => state.build.gearsData || []);
   const imageData = useSelector((state) => state.build.modifyimages);
 
-  /* -------------------- STOP LOADING WHEN DATA ARRIVES -------------------- */
+ 
   useEffect(() => {
     if (data && data.length > 0) {
       setLoading(false);
     }
   }, [data]);
 
-  /* -------------------- IMAGE MAP -------------------- */
+  
   const modifyimages = useMemo(() => {
     const result = {};
     imageData?.forEach((item) => {
@@ -29,7 +29,7 @@ const SHowGears = ({ setImage, gearsData, setGearData }) => {
     return result;
   }, [imageData]);
 
-  /* -------------------- CARD CLICK -------------------- */
+  
   const handleCardClick = (imgData, imgName, price) => {
     try {
       const exists = isSelected.some((item) => item.name === imgName);
@@ -52,7 +52,7 @@ const SHowGears = ({ setImage, gearsData, setGearData }) => {
     }
   };
 
-  /* -------------------- IMAGE LOGIC -------------------- */
+ 
   const handleImage = (name1, name2) => {
     const n1 = String(name1).trim();
     const n2 = String(name2).trim();
@@ -79,7 +79,7 @@ const SHowGears = ({ setImage, gearsData, setGearData }) => {
     }
   };
 
-  /* -------------------- IMAGE EFFECT -------------------- */
+  
   useEffect(() => {
     if (!modifyimages) return;
 
@@ -97,7 +97,7 @@ const SHowGears = ({ setImage, gearsData, setGearData }) => {
     }
   }, [itemSelected, isSelected, modifyimages]);
 
-  /* -------------------- UI -------------------- */
+  
   return (
     <div className="flex flex-col">
       <div>
@@ -114,7 +114,7 @@ const SHowGears = ({ setImage, gearsData, setGearData }) => {
           Choose Your Outside Gears
         </h5>
 
-        {/* -------------------- LOADING -------------------- */}
+        
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
             {[1, 2, 3].map((i) => (

@@ -6,7 +6,8 @@ const ShowBase = ({ setImage }) => {
   const [orderData, setOrderData] = useState([]);
 
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.build.baseData || []);
+ const { baseData:data, loading } = useSelector((state) => state.build);
+
 
   const handleOrder = (item) => {
     setOrderData((prev) => {
@@ -48,6 +49,58 @@ const ShowBase = ({ setImage }) => {
     return map;
   }, [utilities]);
 
+
+
+if (loading) {
+  return (
+    <div className="px-6 mt-10 animate-pulse">
+      
+      <div className="h-8 w-48 bg-gray-200 rounded mb-2"></div>
+      <div className="h-3 w-64 bg-gray-100 rounded mb-10"></div>
+
+     
+      <div className="space-y-4">
+        {[1, 2, 3].map((_, i) => (
+          <div
+            key={i}
+            className="flex items-center justify-between bg-gray-100 rounded-2xl p-4"
+          >
+            <div className="space-y-2">
+              <div className="h-4 w-32 bg-gray-200 rounded"></div>
+              <div className="h-3 w-20 bg-gray-200 rounded"></div>
+            </div>
+            <div className="w-24 h-16 bg-gray-200 rounded"></div>
+          </div>
+        ))}
+      </div>
+
+     
+      <div className="mt-10">
+        <div className="h-5 w-40 bg-gray-200 rounded mb-4"></div>
+        <div className="flex gap-4">
+          {[1, 2, 3, 4].map((_, i) => (
+            <div
+              key={i}
+              className="w-14 h-14 bg-gray-200 rounded-full"
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      
+      <div className="mt-10 space-y-4">
+        {[1, 2].map((_, i) => (
+          <div
+            key={i}
+            className="h-20 bg-gray-100 rounded-2xl"
+          ></div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
   
   const selectedModel = orderData.find((e) => e.modelName)?.modelName;
   const selectedColor = orderData.find((e) => e.color)?.color;
@@ -59,7 +112,9 @@ const ShowBase = ({ setImage }) => {
 
   return (
     <div className="">
-   
+       
+
+
       <div className="mt-10 w-full h-full">
         <h5 className="text-3xl">
           <span className="underline font-semibold">Build</span> The Base
