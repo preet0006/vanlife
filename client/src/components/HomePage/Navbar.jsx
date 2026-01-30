@@ -122,6 +122,19 @@ const Navbar = ({ setActive }) => {
           </button>
         </div>
       </div>
+      
+       { showContact &&(
+     <div className="absolute flex max-w-screen h-screen justify-center items-center inset-0">
+
+     <div className="flex w-full max-w-screen z-20  items-center">
+     <ContactUs isOpen = {setShowContact}/>
+ 
+     </div>
+ 
+ 
+    </div>
+  )
+ }
 
       {showContact && <ContactUs isOpen={setShowContact} />}
 
