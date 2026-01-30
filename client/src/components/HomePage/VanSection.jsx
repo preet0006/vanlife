@@ -1,56 +1,72 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gethome } from "../../store/slices/homepageSlice";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const VanSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const containerRef = useRef(null);
 
   const van = useSelector((state) => state.home.vanCard);
 
-
+ 
   useEffect(() => {
-    dispatch(gethome());
-  }, [dispatch]);
+    if (!van || van.length === 0) {
+      dispatch(gethome());
+    }
+  }, [dispatch, van]);
 
-
+  
   useEffect(() => {
     if (!van || van.length === 0) return;
 
-    
-    const cards = gsap.utils.toArray(".van-card");
+    let ctx;
 
-    cards.forEach((card) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.5,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            end: "top 50%",
-            scrub: 1,
-          },
-        }
-      );
-    });
+    const loadGsap = async () => {
+      const gsapModule = await import("gsap");
+      const scrollTriggerModule = await import("gsap/ScrollTrigger");
 
-    
+      const gsap = gsapModule.default;
+      const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      ctx = gsap.context(() => {
+        const cards = gsap.utils.toArray(".van-card");
+
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 80%",
+                once: true, 
+              },
+            }
+          );
+        });
+      }, containerRef);
+    };
+
+    loadGsap();
+
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (ctx) ctx.revert(); 
     };
   }, [van]);
 
   return (
-    <div className="flex flex-col min-h-screen justify-center sm:mt-12 items-center">
+    <div
+      ref={containerRef}
+      className="flex flex-col min-h-screen justify-center sm:mt-12 items-center"
+    >
       <div className="gap-8 mt-12 flex max-w-screen w-full flex-wrap items-stretch justify-center">
         {van.map((elem, index) => (
           <div
@@ -59,9 +75,8 @@ const VanSection = () => {
             style={{ backgroundImage: `url(${elem.images[0]})` }}
           >
             <div className="flex flex-col justify-center items-center pt-4 sm:pt-10">
-              <h3 className="text-2xl">
-                <span className="sm:text-2xl font-semibold">{elem.name}</span>
-              </h3>
+              <h3 className="text-2xl font-semibold">{elem.name}</h3>
+
               <p className="text-center text-gray-500 w-full max-w-40 text-xs sm:text-[14px]">
                 {elem.description}
               </p>
@@ -73,6 +88,7 @@ const VanSection = () => {
                 >
                   Explore More
                 </button>
+
                 <button
                   onClick={() => navigate("/inventory")}
                   className="bg-white text-xs sm:text-[16px] text-black px-6 py-4 rounded-4xl"
@@ -80,11 +96,11 @@ const VanSection = () => {
                   See Inventory
                 </button>
               </div>
-               </div>
-               </div>
+            </div>
+          </div>
         ))}
       </div>
-            </div>
+    </div>
   );
 };
 

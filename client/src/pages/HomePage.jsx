@@ -1,28 +1,28 @@
-// HomePage.jsx
 import Navbar from "../components/HomePage/Navbar"
 import Hero from "../components/HomePage/Hero"
-import PlusSection from "../components/Plus/PlusSection"
-import PlusGallery from "../components/Plus/PlusGallery"
-import PlusWhy from "../components/Plus/PlusWhy"
-import PlusVideo from "../components/Plus/PlusVideo"
-import VanCard from "../components/HomePage/VanCard"
-import PlusVanShowCase from "../components/Plus/PlusVanShowCase"
-import PlusInfo from "../components/Plus/PlusInfo"
-import FootCard from "../components/HomePage/FootCard"
-import Questions from "../components/HomePage/Questions"
-import Footer from "../components/HomePage/Footer"
-import { useEffect } from "react"
+
+import { lazy, Suspense, useEffect } from "react"
 import { getPlus } from "../store/slices/homepageSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { Element } from "react-scroll"
 
+// 🔹 Lazy imports (below the fold)
+const PlusSection = lazy(() => import("../components/Plus/PlusSection"))
+const PlusGallery = lazy(() => import("../components/Plus/PlusGallery"))
+const PlusWhy = lazy(() => import("../components/Plus/PlusWhy"))
+const PlusVideo = lazy(() => import("../components/Plus/PlusVideo"))
+const VanCard = lazy(() => import("../components/HomePage/VanCard"))
+const PlusVanShowCase = lazy(() => import("../components/Plus/PlusVanShowCase"))
+const PlusInfo = lazy(() => import("../components/Plus/PlusInfo"))
+const FootCard = lazy(() => import("../components/HomePage/FootCard"))
+const Questions = lazy(() => import("../components/HomePage/Questions"))
+const Footer = lazy(() => import("../components/HomePage/Footer"))
+
 const HomePage = () => {
   const dispatch = useDispatch()
-  const { plus:data, loading } = useSelector((state) => state.home);
-  console.log(data)
+  const { plus: data } = useSelector((state) => state.home)
 
   const {
-    heroImages = [],
     images = [],
     plusGearCards = [],
     whyNoovoCards = [],
@@ -36,26 +36,10 @@ const HomePage = () => {
     }
   }, [dispatch, data])
 
-
-
-  if (loading) {
-  return (
-  <div className="flex items-center justify-center min-h-[60vh]">
-  <div className="flex space-x-2">
-    <span className="h-2.5 w-2.5 bg-gray-800 rounded-full animate-pulse" />
-    <span className="h-2.5 w-2.5 bg-gray-800 rounded-full animate-pulse [animation-delay:200ms]" />
-    <span className="h-2.5 w-2.5 bg-gray-800 rounded-full animate-pulse [animation-delay:400ms]" />
-  </div>
-</div>
-
-  );
-}
-
-
   return (
     <div className="flex flex-col overflow-x-hidden m-auto max-w-screen w-full scrollbar-hide">
 
-      
+     
       <div className="relative bg-[url('/plus.webp')] bg-no-repeat bg-cover bg-center max-w-screen w-full h-[70dvh] sm:w-screen sm:h-screen">
         <section className="text-black">
           <Navbar />
@@ -66,58 +50,61 @@ const HomePage = () => {
       </div>
 
      
-      <Element name="plusSection">
-        <PlusSection />
-      </Element>
+      <Suspense fallback={<div className="h-screen" />}>
+        
+        <Element name="plusSection">
+          <PlusSection />
+        </Element>
 
-      <Element name="plusGallery">
-        <PlusGallery galleryImages={gallerydata} />
-      </Element>
+        <Element name="plusGallery">
+          <PlusGallery galleryImages={gallerydata} />
+        </Element>
 
-      <Element name="plusWhy">
-        <PlusWhy whyImages={whyNoovoCards} />
-      </Element>
+        <Element name="plusWhy">
+          <PlusWhy whyImages={whyNoovoCards} />
+        </Element>
 
-      <Element name="plusVideo">
-        <PlusVideo />
-      </Element>
+        <Element name="plusVideo">
+          <PlusVideo />
+        </Element>
 
-      <Element name="plusVanShowCase">
-        <PlusVanShowCase />
-      </Element>
+        <Element name="plusVanShowCase">
+          <PlusVanShowCase />
+        </Element>
 
-      
-      <div className="bg-[#131211] min-h-screen min-w-screen text-white">
-        <div className="flex flex-col md:flex-row gap-4 justify-center items-center text-center space-x-6 lg:space-x-60 py-20">
-          <h3 className="hidden sm:block text-xl sm:text-2xl lg:text-6xl font-normal">
-            Geared Up for <br /> Adventure
-          </h3>
-          <h3 className="sm:hidden text-xl sm:text-2xl lg:text-6xl font-normal">
-            Geared Up for Adventure
-          </h3>
-          <p className="text-gray-300 max-w-80 lg:mt-2 text-xs sm:text-[20px] text-center">
-            Bike, hike, surf, yoga... customize your Noovo for your type of fun. Choose which racks, tires, and storage will aid your adventure.
-          </p>
+        <div className="bg-[#131211] min-h-screen min-w-screen text-white">
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center text-center space-x-6 lg:space-x-60 py-20">
+            <h3 className="hidden sm:block text-xl sm:text-2xl lg:text-6xl font-normal">
+              Geared Up for <br /> Adventure
+            </h3>
+            <h3 className="sm:hidden text-xl sm:text-2xl lg:text-6xl font-normal">
+              Geared Up for Adventure
+            </h3>
+            <p className="text-gray-300 max-w-80 lg:mt-2 text-xs sm:text-[20px] text-center">
+              Bike, hike, surf, yoga... customize your Noovo for your type of fun. Choose which racks, tires, and storage will aid your adventure.
+            </p>
+          </div>
+
+          <VanCard type="plus" plusData={plusGearCards} />
         </div>
-        <VanCard type="plus" plusData={plusGearCards} />
-      </div>
 
-      <Element name="plusInfo">
-        <PlusInfo />
-      </Element>
+        <Element name="plusInfo">
+          <PlusInfo />
+        </Element>
 
-      <Element name="footCard">
-        <FootCard />
-      </Element>
+        <Element name="footCard">
+          <FootCard />
+        </Element>
 
-      <Element name="questions">
-        <Questions />
-      </Element>
+        <Element name="questions">
+          <Questions />
+        </Element>
 
-      <Element name="footer">
-        <Footer />
-      </Element>
+        <Element name="footer">
+          <Footer />
+        </Element>
 
+      </Suspense>
     </div>
   )
 }

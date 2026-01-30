@@ -1,5 +1,3 @@
-import {useGSAP} from '@gsap/react'
-import gsap from 'gsap'
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,19 +7,27 @@ const Hero = ({type}) => {
   const textref = useRef();
   const lineref = useRef()
 
-  const {contextSafe}= useGSAP();
+  // const {contextSafe}= useGSAP();
   
 
-   useEffect(() => {
-    
-    gsap.from(textref.current,{
-    y:20,
-    opacity:0,
-    delay:1,
-    duration:1,
-    })
-   }, [])
- 
+    useEffect(() => {
+    let ctx;
+
+    (async () => {
+      const { gsap } = await import("gsap");
+
+      ctx = gsap.context(() => {
+        gsap.from(textref.current, {
+          y: 20,
+          opacity: 0,
+          delay: 0.3,
+          duration: 0.8,
+        });
+      });
+    })();
+
+    return () => ctx && ctx.revert();
+  }, []);
    
   return (
     <div>
